@@ -29,6 +29,7 @@
 .claim h1 {
     font-size:64px;
     font-family: Satoshi, system-ui, -apple-system, Segoe UI, Roboto, Helvetica;
+    padding-top: 32px;
     padding-bottom: 128px;
 }
 
@@ -211,10 +212,26 @@ a {
 }
 
 .container {
-  max-width: 1180px;
+  max-width: 1366px;
   margin: 0 auto;
-  padding: 22px 20px 72px;
+  padding: 22px 20px 22px;
   
+}
+
+.container-a {
+/*  max-width: 1366px;*/
+  margin: 0;
+/*  padding: 22px 20px 22px;*/
+/*  background: #407da3;*/
+  height: 200px;
+  display: flex;
+
+    
+  background-image: url("../images/NuWayMind/PerformanceMeeting78.png");
+  background-size: cover;        /* fills the section */
+  background-position: top;   /* centers the image */
+  background-repeat: repeat;
+    
 }
 
 .container2 {
@@ -225,7 +242,7 @@ a {
     display: flex;
 /*    align-items: center;*/
     
-  background-image: url("../images/NuWayMind/PerformanceMeeting41.png");
+  background-image: url("../images/NuWayMind/PerformanceMeeting54.png");
   background-size: cover;        /* fills the section */
   background-position: top;   /* centers the image */
   background-repeat: no-repeat;
@@ -275,6 +292,7 @@ a {
   gap: 18px;
   text-align: center;
 /*  flex-wrap: wrap;*/
+/*  justify-content: center;*/
   justify-content: flex-end;
 }
 
