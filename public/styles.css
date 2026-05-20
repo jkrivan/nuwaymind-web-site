@@ -480,6 +480,10 @@ h3 {
   font-weight: 900;
 }
 
+.topic-chip {
+  margin-bottom: 28px;
+}
+
 .muted {
   background: linear-gradient(180deg, var(--nwm-mist), #fff);
 }
