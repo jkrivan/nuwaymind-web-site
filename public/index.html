@@ -27,6 +27,7 @@
         <a href="#services">Services</a>
         <a href="#framework">Framework</a>
         <a href="#zapro">ZAPRO</a>
+        <a href="#pricing">Pricing</a>
         <a href="#process">Process</a>
         <a href="#approach">Approach</a>
         <a class="nav-cta" href="#contact">Book a call</a>
@@ -199,6 +200,261 @@
           <div class="stack-item"><span>Exceptions</span><strong>Managed</strong></div>
           <div class="stack-item"><span>Audit trail</span><strong>Ready</strong></div>
           <div class="stack-item"><span>Compliance</span><strong>Maximized</strong></div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section muted zapro-pricing" id="pricing" aria-labelledby="zapro-pricing-title">
+      <div class="shell">
+        <div class="section-heading centered reveal">
+          <p class="eyebrow">ZAPRO subscription calculator</p>
+          <h2 id="zapro-pricing-title">Estimate annual subscription cost of  Digital Procuremen .</h2>
+          <p>Calculate the estimated yearly subscription value from the fixed platform fee, selected user modules and optional add-ons.</p>
+        </div>
+
+        <div class="pricing-calculator reveal" data-zapro-calculator>
+          <div class="calculator-panel calculator-inputs" aria-label="ZAPRO calculator inputs">
+            <div class="calculator-topline">
+              <div>
+                <span>Fixed platform fee</span>
+                <strong>€10,000 / year</strong>
+              </div>
+              <span class="calculator-badge">Estimate</span>
+            </div>
+
+            <fieldset class="billing-switch" aria-label="Billing mode">
+              <legend>Billing basis</legend>
+              <label>
+                <input type="radio" name="zapro-billing" value="annual" checked />
+                <span>Annual rates</span>
+              </label>
+              <label>
+                <input type="radio" name="zapro-billing" value="monthly" />
+                <span>Monthly rates annualised</span>
+              </label>
+            </fieldset>
+
+            <div class="calculator-fields">
+              <label class="calc-field" for="zapro-o2c-users">
+                <span class="calc-field-title"><span>O2C users</span><em class="item-pill item-pill-core">Core</em></span>
+                <small data-rate-label="o2c">€550 per user / year</small>
+                <input id="zapro-o2c-users" type="number" min="0" step="1" value="0" data-calc-input="o2c" />
+              </label>
+
+              <label class="calc-field" for="zapro-s2cp2p-users">
+                <span class="calc-field-title"><span>S2C + P2P users</span><em class="item-pill item-pill-core">Core</em></span>
+                <small data-rate-label="s2cp2p">€550 per user / year</small>
+                <input id="zapro-s2cp2p-users" type="number" min="0" step="1" value="25" data-calc-input="s2cp2p" />
+              </label>
+
+              <label class="calc-field" for="zapro-inventory-users">
+                <span class="calc-field-title"><span>Inventory management</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <small data-rate-label="inventory">€275 per user / year</small>
+                <input id="zapro-inventory-users" type="number" min="0" step="1" value="0" data-calc-input="inventory" />
+              </label>
+
+              <label class="calc-field" for="zapro-te-users">
+                <span class="calc-field-title"><span>T&amp;E</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <small data-rate-label="te">€110 per user / year</small>
+                <input id="zapro-te-users" type="number" min="0" step="1" value="0" data-calc-input="te" />
+              </label>
+
+              <label class="calc-field" for="zapro-vendor-onboarding">
+                <span class="calc-field-title"><span>Vendor onboarding support</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <small data-rate-label="vendorOnboarding">€7 per vendor</small>
+                <input id="zapro-vendor-onboarding" type="number" min="0" step="1" value="0" data-calc-input="vendorOnboarding" />
+              </label>
+
+              <label class="calc-field calc-field-derived calc-field-option" for="zapro-l1-support">
+                <span class="calc-field-title"><span>L1 support</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <small data-rate-label="l1Support">€11,000 per year</small>
+                <span class="checkbox-control">
+                  <input id="zapro-l1-support" type="checkbox" data-calc-option="l1Support" />
+                  <span>Include L1 support service</span>
+                </span>
+                <p data-l1-support-basis>Optional service excluded from the estimate unless selected</p>
+              </label>
+            </div>
+
+            <button class="btn btn-secondary calculator-reset" type="button" data-calc-reset>Reset quantities</button>
+          </div>
+
+          <div class="calculator-panel calculator-results" aria-live="polite">
+            <p class="eyebrow">Estimated annual value</p>
+            <div class="calculator-total">
+              <span data-total-annual>€23,750</span>
+              <small data-total-monthly>Equivalent to €1,979 / month</small>
+            </div>
+
+            <div class="cost-breakdown" aria-label="ZAPRO cost breakdown">
+              <div class="cost-row">
+                <span><span>Platform annual fee</span><em class="item-pill item-pill-core">Core</em></span>
+                <strong data-total="platform">€10,000</strong>
+              </div>
+              <div class="cost-row">
+                <span><span>O2C users</span><em class="item-pill item-pill-core">Core</em></span>
+                <strong data-total="o2c">€0</strong>
+              </div>
+              <div class="cost-row">
+                <span><span>S2C + P2P users</span><em class="item-pill item-pill-core">Core</em></span>
+                <strong data-total="s2cp2p">€13,750</strong>
+              </div>
+              <div class="cost-row">
+                <span><span>Inventory management</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <strong data-total="inventory">€0</strong>
+              </div>
+              <div class="cost-row">
+                <span><span>T&amp;E</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <strong data-total="te">€0</strong>
+              </div>
+              <div class="cost-row">
+                <span><span>Vendor onboarding support</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <strong data-total="vendorOnboarding">€0</strong>
+              </div>
+              <div class="cost-row">
+                <span><span>L1 support</span><em class="item-pill item-pill-addon">Add-on</em></span>
+                <strong data-total="l1Support">€0</strong>
+              </div>
+            </div>
+
+            <a class="btn btn-primary enterprise-price-btn" href="#contact" data-enterprise-price hidden>Ask for individual enterprise price</a>
+
+            <div class="pricing-note" data-pricing-note>
+              Annual rates reduce the user subscription value compared with paying monthly and annualising the spend. Optional service add-ons are added only when selected or when quantities are entered.
+            </div>
+          </div>
+        </div>
+
+        <div class="module-explainer reveal" aria-labelledby="module-explainer-title">
+          <div class="section-heading centered">
+            <p class="eyebrow">Module explanation</p>
+            <h3 id="module-explainer-title">What each pricing item covers.</h3>
+            <p>Use this overview to distinguish the fixed platform layer, core transactional modules and optional service add-ons.</p>
+          </div>
+
+          <div class="module-sections" aria-label="Detailed ZAPRO module descriptions">
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-core">Core</span>
+                <h4>Platform annual fee</h4>
+                <p class="module-price">€10,000 per year</p>
+              </div>
+              <div class="module-section-body">
+                <p>The platform annual fee represents the fixed ZAPRO environment required to operate the selected modules across the organisation. It is the common digital foundation where users, workflows, approval rules, audit trail and reporting visibility are maintained in one controlled system layer.</p>
+                <ul>
+                  <li>Provides the shared platform layer for configuration of business workflows, approval routing, user access and operating rules.</li>
+                  <li>Supports traceability of actions, decisions and approval evidence so management can see how commercial transactions were initiated, reviewed and approved.</li>
+                  <li>Creates the technical and governance base for connecting modules such as O2C, S2C, P2P, Inventory, T&amp;E and supplier-facing services.</li>
+                  <li>Helps standardise the way different entities, departments and user groups work inside the same procurement and commercial control environment.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-core">Core</span>
+                <h4>O2C users</h4>
+                <p class="module-price">€50 per user / month or €550 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>Order-to-Cash user access is designed for teams that manage customer-side commercial execution. It supports the structured handling of customer demand, order processing and downstream coordination so that revenue-related activities are visible, controlled and easier to follow from request to fulfilment.</p>
+                <ul>
+                  <li>Supports controlled customer order handling, sales-order visibility and commercial execution discipline.</li>
+                  <li>Improves transparency around customer demand, fulfilment coordination, billing readiness and follow-up activities linked to cash conversion.</li>
+                  <li>Helps align sales, customer service, finance and operations around the same transaction record instead of fragmented email-based communication.</li>
+                  <li>Provides management with clearer visibility over customer-side workload, execution status and process bottlenecks affecting revenue flow.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-core">Core</span>
+                <h4>S2C + P2P users</h4>
+                <p class="module-price">€50 per user / month or €550 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>Source-to-Contract and Procure-to-Pay user access is the central procurement control module. It covers the operational path from supplier selection and sourcing preparation through contract control, purchase requisition, purchase order, receipt confirmation, invoice validation and payment-related evidence.</p>
+                <ul>
+                  <li>Supports supplier research, sourcing events, commercial comparison, negotiation evidence and controlled supplier award decisions.</li>
+                  <li>Connects contracts, purchase requisitions and purchase orders so that spend is committed through a governed and auditable process.</li>
+                  <li>Enables receipt and invoice control, including evidence needed for two-way or three-way matching depending on the business process.</li>
+                  <li>Helps reduce spend leakage by ensuring that purchases are visible before they become invoices or uncontrolled financial commitments.</li>
+                  <li>Gives procurement, finance and business owners a shared view of approval status, supplier accountability and transaction history.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>Inventory management</h4>
+                <p class="module-price">€25 per user / month or €275 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>The Inventory management add-on extends the procurement process into stock-related operational control. It is intended for users who need to connect purchasing decisions with stock availability, replenishment needs, goods receipt and inventory consumption visibility.</p>
+                <ul>
+                  <li>Supports visibility over inventory-related activities so purchasing can be connected to actual operational demand and stock availability.</li>
+                  <li>Helps link purchase orders, deliveries and receipt confirmation with inventory follow-up and replenishment discipline.</li>
+                  <li>Improves control over stock movements, usage visibility and the relationship between ordered quantities, received quantities and available stock.</li>
+                  <li>Provides a stronger basis for reducing emergency purchases, duplicated buying and stock-related process gaps.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>T&amp;E</h4>
+                <p class="module-price">€10 per user / month or €110 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>The Travel &amp; Expense add-on supports governance of employee expenses, travel requests and reimbursement-related workflows. It helps organisations move expense handling from informal communication into a controlled process with clear ownership, approval evidence and policy visibility.</p>
+                <ul>
+                  <li>Supports structured submission of travel or expense requests with documentation, purpose and approval status captured in the process.</li>
+                  <li>Helps enforce expense policy, review discipline and approval accountability before reimbursement or financial processing.</li>
+                  <li>Improves transparency for managers and finance teams by making claims, supporting evidence and decision history easier to review.</li>
+                  <li>Reduces manual follow-up and fragmented expense communication by creating a clearer workflow for employees and approvers.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>Vendor onboarding support</h4>
+                <p class="module-price">€7 per vendor</p>
+              </div>
+              <div class="module-section-body">
+                <p>Vendor onboarding support is an optional service charged per supplier. It is designed to help organisations activate vendors into the ZAPRO operating model by supporting registration, communication, completion follow-up and readiness for supplier-facing transactions.</p>
+                <ul>
+                  <li>Supports supplier registration coordination, onboarding communication and follow-up with vendors that need to complete required information.</li>
+                  <li>Helps improve supplier data readiness before vendors start receiving purchase orders, submitting delivery notes or sending invoices through the platform.</li>
+                  <li>Reduces internal administrative workload during rollout by giving suppliers clearer guidance on what is expected and how to complete onboarding steps.</li>
+                  <li>Creates a cleaner starting point for supplier master governance, transaction readiness and process adoption.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>L1 support</h4>
+                <p class="module-price">€1,000 per month or €11,000 per year</p>
+              </div>
+              <div class="module-section-body">
+                <p>L1 support is an optional first-line support service that can be selected in the calculator by checkbox. It is priced as a flat service fee and is intended to support day-to-day system adoption by giving users a defined first contact point for basic questions, initial issue triage and operational guidance.</p>
+                <ul>
+                  <li>Provides first-line guidance for common user questions related to navigation, process steps, basic usage and transaction handling.</li>
+                  <li>Supports initial issue triage by clarifying whether the case is a user guidance topic, process question, configuration matter or issue requiring deeper escalation.</li>
+                  <li>Helps maintain adoption after rollout by reducing uncertainty for users and providing a practical channel for basic operational support.</li>
+                  <li>Can support the internal project or process owner by filtering recurring questions, documenting common support patterns and routing complex cases to the correct responsible party.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
         </div>
       </div>
     </section>
