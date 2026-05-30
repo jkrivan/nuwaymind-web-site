@@ -1065,6 +1065,7 @@ h3 {
 
 .checkbox-control span {
   line-height: 1.2;
+  min-width: 160px;
 }
 
 .item-pill {
