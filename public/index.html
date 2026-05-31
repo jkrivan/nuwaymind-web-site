@@ -261,7 +261,8 @@
       <div class="shell">
         <div class="section-heading centered reveal">
           <p class="eyebrow">ZAPRO subscription calculator</p>
-          <h2 id="zapro-pricing-title">Digital Procurement<br/>subscription cost</h2>
+          <h2 id="zapro-pricing-title">Digital Procurement<br/>
+          subscription calculation</h2>
           <p>Calculate the estimated monthly and annual subscription value from the fixed platform fee, selected user modules and optional add-on services.</p>
         </div>
 
@@ -269,8 +270,9 @@
           <div class="calculator-panel calculator-inputs" aria-label="ZAPRO calculator inputs">
             <div class="calculator-topline">
               <div>
-                <span>Fixed platform fee</span>
-                <strong>€10,000 / year</strong>
+                <span>Platform fee</span>
+                <strong data-platform-fee-label>From €10,000 / year</strong>
+                <p data-platform-fee-basis>Includes the first 100 total users; +€5,000/year for each started additional 100-user block.</p>
               </div>
               <span class="calculator-badge">Estimate</span>
             </div>
@@ -289,33 +291,48 @@
 
             <div class="calculator-fields">
               <label class="calc-field" for="zapro-o2c-users">
-                <span class="calc-field-title"><span>O2C users</span><em class="item-pill item-pill-core">Core</em></span>
+                <span class="calc-field-title"><span>Order to Cash<br/>(O2C)</span><em class="item-pill item-pill-core">Core</em></span>
                 <small data-rate-label="o2c">€550 per user / year</small>
-                <input id="zapro-o2c-users" type="number" min="0" step="1" value="0" data-calc-input="o2c" />
+                <span class="users-control">
+                    <span>Users:</span>
+                    <input id="zapro-o2c-users" type="number" min="0" step="1" value="0" data-calc-input="o2c" />
+                </span>
               </label>
 
               <label class="calc-field" for="zapro-s2cp2p-users">
-                <span class="calc-field-title"><span>S2C + P2P users</span><em class="item-pill item-pill-core">Core</em></span>
+                <span class="calc-field-title"><span>Source to Pay (S2C+P2P)</span><em class="item-pill item-pill-core">Core</em></span>
                 <small data-rate-label="s2cp2p">€550 per user / year</small>
-                <input id="zapro-s2cp2p-users" type="number" min="0" step="1" value="25" data-calc-input="s2cp2p" />
+                <span class="users-control">
+                    <span>Users:</span>
+                    <input id="zapro-s2cp2p-users" type="number" min="0" step="1" value="25" data-calc-input="s2cp2p" />
+                </span>
               </label>
 
               <label class="calc-field" for="zapro-inventory-users">
                 <span class="calc-field-title"><span>Inventory management</span><em class="item-pill item-pill-addon">Add-on</em></span>
                 <small data-rate-label="inventory">€275 per user / year</small>
-                <input id="zapro-inventory-users" type="number" min="0" step="1" value="0" data-calc-input="inventory" />
+                <span class="users-control">
+                    <span>Users:</span>
+                    <input id="zapro-inventory-users" type="number" min="0" step="1" value="0" data-calc-input="inventory" />
+                </span>
               </label>
 
               <label class="calc-field" for="zapro-te-users">
                 <span class="calc-field-title"><span>T&amp;E</span><em class="item-pill item-pill-addon">Add-on</em></span>
                 <small data-rate-label="te">€110 per user / year</small>
-                <input id="zapro-te-users" type="number" min="0" step="1" value="0" data-calc-input="te" />
+                <span class="users-control">
+                    <span>Users:</span>
+                    <input id="zapro-te-users" type="number" min="0" step="1" value="0" data-calc-input="te" />
+                </span>
               </label>
 
               <label class="calc-field" for="zapro-vendor-onboarding">
                 <span class="calc-field-title"><span>Vendor onboarding support</span><em class="item-pill item-pill-addon">Add-on</em></span>
-                <small data-rate-label="vendorOnboarding">€7 per vendor</small>
-                <input id="zapro-vendor-onboarding" type="number" min="0" step="1" value="0" data-calc-input="vendorOnboarding" />
+                <small data-rate-label="vendorOnboarding">€7 per onboarded vendor</small>
+                <span class="users-control">
+                    <span>Vendors:</span>
+                    <input id="zapro-vendor-onboarding" type="number" min="0" step="1" value="0" data-calc-input="vendorOnboarding" />
+                </span>
               </label>
 
               <label class="calc-field calc-field-derived calc-field-option" for="zapro-l1-support">
@@ -325,7 +342,7 @@
                   <span>L1 support service</span>
                   <input id="zapro-l1-support" type="checkbox" data-calc-option="l1Support" />
                 </span>
-                <p data-l1-support-basis>Optional service, when selected, it scales by each started block of 100 total users.</p>
+                <p data-l1-support-basis>Optional service: if selected, pricing is calculated per started block of 100 users based on the total number of users.</p>
               </label>
             </div>
 
@@ -336,12 +353,13 @@
             <p class="eyebrow" data-total-heading>Estimated annual value</p>
             <div class="calculator-total">
               <span data-total-primary>€23,750 / year</span>
-              <small data-total-secondary>Equivalent to €1,979 / month</small>
+              <small data-total-tercier>Equivalent to €1,979 / month</small>
+              <small data-total-secondary></small>
             </div>
 
             <div class="cost-breakdown" aria-label="ZAPRO cost breakdown">
               <div class="cost-row">
-                <span>Platform annual fee<em class="item-pill item-pill-core">Core</em></span>
+                <span>Platform fee<em class="item-pill item-pill-core">Core</em></span>
                 <strong data-total="platform">€10,000</strong>
               </div>
               <div class="cost-row">
@@ -368,12 +386,16 @@
                 <span>L1 support<em class="item-pill item-pill-addon">Add-on</em></span>
                 <strong data-total="l1Support">€0</strong>
               </div>
+              <div class="cost-row discount-row" data-discount-row hidden>
+                <span>Annual rate discount<em class="item-pill item-pill-discount">Discount</em></span>
+                <strong data-total="discount">-€0</strong>
+              </div>
             </div>
 
             <a class="btn btn-primary enterprise-price-btn" href="#contact" data-enterprise-price hidden>Ask for individual enterprise price</a>
 
             <div class="pricing-note" data-pricing-note>
-              Annual rates reduce the user subscription value compared with paying monthly and annualising the spend. Optional service add-ons are added only when selected or when quantities are entered.
+              Annual rates may include a volume discount. The discount is calculated only for annual billing and equals 3.5% for each full €100,000 of pre-discount annual value, capped at 42%.
             </div>
           </div>
         </div>
@@ -390,12 +412,13 @@
               <div class="module-section-meta">
                 <span class="item-pill item-pill-core">Core</span>
                 <h4>Platform annual fee</h4>
-                <p class="module-price">€10,000 per year</p>
+                <p class="module-price">From €10,000 per year</p>
               </div>
               <div class="module-section-body">
-                <p>The platform fee covers the shared ZAPRO environment used to run workflows, approvals, user access, audit trail and reporting across selected modules.</p>
+                <p>The platform fee covers the shared ZAPRO environment used to run workflows, approvals, user access, audit trail and reporting across selected modules. It starts at €10,000 per year for the first 250 total users and increases by €5,000 per year for each started additional 250-user pack.</p>
                 <ul>
                   <li>Central system layer for configuration, permissions, workflows and approval logic.</li>
+                  <li>Automatically scales with total selected users across O2C, S2C + P2P, Inventory and T&amp;E.</li>
                   <li>Common audit trail for commercial decisions, user actions and transaction evidence.</li>
                   <li>Foundation for connecting S2C, P2P, O2C, Inventory, T&amp;E and supplier-facing processes.</li>
                 </ul>
@@ -405,8 +428,8 @@
             <article class="module-section">
               <div class="module-section-meta">
                 <span class="item-pill item-pill-core">Core</span>
-                <h4>O2C users</h4>
-                <p class="module-price">€50 per user / month or €550 per user / year</p>
+                <h4>Order to Cash (O2C)</h4>
+                <p class="module-price">From €50 per user / month</p>
               </div>
               <div class="module-section-body">
                 <p>O2C supports customer-side commercial execution, from order handling and fulfilment visibility to finance-ready transaction control.</p>
@@ -421,8 +444,9 @@
             <article class="module-section">
               <div class="module-section-meta">
                 <span class="item-pill item-pill-core">Core</span>
-                <h4>S2C + P2P users</h4>
-                <p class="module-price">€50 per user / month or €550 per user / year</p>
+                <h4>Source to Pay</h4>
+                <h4>(S2C + P2P)</h4>
+                    <p class="module-price">From €50 per user / month</p>
               </div>
               <div class="module-section-body">
                 <p>S2C + P2P is the main procurement control module, covering supplier selection, sourcing, contracts, requisitions, purchase orders, receipts and invoice control.</p>
@@ -438,7 +462,7 @@
               <div class="module-section-meta">
                 <span class="item-pill item-pill-addon">Add-on</span>
                 <h4>Inventory management</h4>
-                <p class="module-price">€25 per user / month or €275 per user / year</p>
+                <p class="module-price">From €25 per user / month</p>
               </div>
               <div class="module-section-body">
                 <p>Inventory management extends procurement control into stock visibility, replenishment discipline and receipt-based inventory follow-up.</p>
@@ -454,7 +478,7 @@
               <div class="module-section-meta">
                 <span class="item-pill item-pill-addon">Add-on</span>
                 <h4>T&amp;E</h4>
-                <p class="module-price">€10 per user / month or €110 per user / year</p>
+                <p class="module-price">From €10 per user / month</p>
               </div>
               <div class="module-section-body">
                 <p>T&amp;E supports controlled handling of travel and expense requests with approval evidence, documentation and policy visibility.</p>
@@ -470,7 +494,7 @@
               <div class="module-section-meta">
                 <span class="item-pill item-pill-addon">Add-on</span>
                 <h4>Vendor onboarding support</h4>
-                <p class="module-price">€7 per vendor</p>
+                <p class="module-price">€7 per onboarded vendor</p>
               </div>
               <div class="module-section-body">
                 <p>Vendor onboarding support helps activate suppliers into the platform and prepare them for supplier-facing transactions.</p>
@@ -486,7 +510,7 @@
               <div class="module-section-meta">
                 <span class="item-pill item-pill-addon">Add-on</span>
                 <h4>L1 support</h4>
-                <p class="module-price">€1,000 per month or €11,000 per year per started 100 users</p>
+                <p class="module-price">€11,000 per year per 100 users</p>
               </div>
               <div class="module-section-body">
                 <p>L1 support is an optional first-line service for basic user questions, initial issue triage and practical adoption support. It scales with adoption: every started block of 100 total users adds one L1 support block.</p>

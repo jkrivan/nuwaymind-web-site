@@ -85,8 +85,12 @@ updateHeader();
 const zaproCalculator = document.querySelector('[data-zapro-calculator]');
 
 if (zaproCalculator) {
-  const platformAnnualCost = 10000;
+  const platformBaseAnnualCost = 10000;
+  const platformAdditionalAnnualCostPerBlock = 5000;
   const enterpriseThreshold = 120000;
+  const annualDiscountStepValue = 100000;
+  const annualDiscountPercentPerStep = 0.035;
+  const annualDiscountMaxRate = 0.42;
   const l1SupportMonthlyPrice = 1000;
   const l1SupportAnnualPrice = 11000;
   const userModuleKeys = ['o2c', 's2cp2p', 'inventory', 'te'];
@@ -112,9 +116,12 @@ if (zaproCalculator) {
   const totalHeading = zaproCalculator.querySelector('[data-total-heading]');
   const totalPrimary = zaproCalculator.querySelector('[data-total-primary]');
   const totalSecondary = zaproCalculator.querySelector('[data-total-secondary]');
+  const totalTercier = zaproCalculator.querySelector('[data-total-tercier]');
   const pricingNote = zaproCalculator.querySelector('[data-pricing-note]');
   const enterprisePriceButton = zaproCalculator.querySelector('[data-enterprise-price]');
   const l1SupportBasis = zaproCalculator.querySelector('[data-l1-support-basis]');
+  const platformFeeLabel = zaproCalculator.querySelector('[data-platform-fee-label]');
+  const platformFeeBasis = zaproCalculator.querySelector('[data-platform-fee-basis]');
 
   function currentBillingMode() {
     return billingInputs.find((input) => input.checked)?.value || 'annual';
@@ -132,6 +139,15 @@ if (zaproCalculator) {
 
   function totalUserCount() {
     return userModuleKeys.reduce((sum, moduleKey) => sum + quantityForModule(moduleKey), 0);
+  }
+
+  function platformAdditionalBlocks() {
+    const users = totalUserCount();
+    return users > 250 ? Math.ceil((users - 250) / 250) : 0;
+  }
+
+  function platformAnnualCost() {
+    return platformBaseAnnualCost + (platformAdditionalBlocks() * platformAdditionalAnnualCostPerBlock);
   }
 
   function l1SupportBlocks() {
@@ -160,13 +176,39 @@ if (zaproCalculator) {
     return billingMode === 'monthly' ? quantity * price.monthly * 12 : quantity * price.annual;
   }
 
-  function calculateTotal(billingMode) {
+  function calculatePreDiscountTotal(billingMode) {
     const inputTotal = quantityInputs.reduce((sum, input) => {
       const moduleKey = input.dataset.calcInput;
       return sum + annualModuleCost(moduleKey, safeQuantity(input), billingMode);
-    }, platformAnnualCost);
+    }, platformAnnualCost());
 
     return inputTotal + l1SupportCost(billingMode);
+  }
+
+  function annualDiscountSteps(preDiscountAnnualValue) {
+    return preDiscountAnnualValue > 0 ? Math.floor(preDiscountAnnualValue / annualDiscountStepValue) : 0;
+  }
+
+  function annualDiscountRate(preDiscountAnnualValue) {
+    return Math.min(annualDiscountSteps(preDiscountAnnualValue) * annualDiscountPercentPerStep, annualDiscountMaxRate);
+  }
+
+  function annualDiscountRateLabel(discountRate, discountSteps) {
+    const discountPercent = Math.round(discountRate * 1000) / 10;
+    const uncappedPercent = Math.round(discountSteps * annualDiscountPercentPerStep * 1000) / 10;
+    return uncappedPercent > discountPercent
+      ? `${discountPercent}% annual discount`
+      : `${discountPercent}% annual discount`;
+  }
+
+  function annualDiscountAmount(billingMode, preDiscountAnnualValue) {
+    if (billingMode !== 'annual') return 0;
+    return Math.round(preDiscountAnnualValue * annualDiscountRate(preDiscountAnnualValue));
+  }
+
+  function calculateTotal(billingMode) {
+    const preDiscountAnnualValue = calculatePreDiscountTotal(billingMode);
+    return preDiscountAnnualValue - annualDiscountAmount(billingMode, preDiscountAnnualValue);
   }
 
   function updateRateLabels(billingMode) {
@@ -191,12 +233,23 @@ if (zaproCalculator) {
 
   function updateCalculator() {
     const billingMode = currentBillingMode();
-    let annualTotalValue = platformAnnualCost;
+    const currentPlatformAnnualCost = platformAnnualCost();
+    let annualTotalValue = currentPlatformAnnualCost;
 
     updateRateLabels(billingMode);
 
     const platformOutput = zaproCalculator.querySelector('[data-total="platform"]');
-    if (platformOutput) platformOutput.textContent = euroFormatter.format(platformAnnualCost);
+    if (platformOutput) platformOutput.textContent = euroFormatter.format(currentPlatformAnnualCost);
+
+    if (platformFeeLabel) platformFeeLabel.textContent = `${euroFormatter.format(currentPlatformAnnualCost)} / year`;
+
+    if (platformFeeBasis) {
+      const users = totalUserCount();
+      const extraBlocks = platformAdditionalBlocks();
+      platformFeeBasis.textContent = extraBlocks > 0
+        ? `${users} users require ${extraBlocks} performance pack${extraBlocks === 1 ? '' : 's'} (+ ${euroFormatter.format(extraBlocks * platformAdditionalAnnualCostPerBlock)}).`
+        : `Covers up to the first 250 total users.`;
+    }
 
     quantityInputs.forEach((input) => {
       const moduleKey = input.dataset.calcInput;
@@ -219,40 +272,63 @@ if (zaproCalculator) {
       const supportBlocks = l1SupportBlocks();
       l1SupportBasis.textContent = isOptionSelected('l1Support')
         ? supportBlocks > 0
-          ? `Selected for ${users} total user${users === 1 ? '' : 's'} → ${supportBlocks} support block${supportBlocks === 1 ? '' : 's'} of 100 users = ${euroFormatter.format(currentL1SupportCost)} annual cost`
+          ? `For ${users} total user${users === 1 ? '' : 's'}, the support service is calculated as ${supportBlocks} pack${supportBlocks === 1 ? '' : 's'}, covering up to ${supportBlocks*100} users, with an annual cost of ${euroFormatter.format(currentL1SupportCost)}`
           : 'Selected, but no user quantities entered yet'
-        : 'Optional service: When selected, it scales by each started block of 100 total users.';
+        : 'Optional service: if selected, pricing is calculated per started block of 100 users based on the total number of users.';
+    }
+
+    const preDiscountAnnualValue = annualTotalValue;
+    const discountSteps = annualDiscountSteps(preDiscountAnnualValue);
+    const discountRate = annualDiscountRate(preDiscountAnnualValue);
+    const discountAmount = annualDiscountAmount(billingMode, preDiscountAnnualValue);
+    const netAnnualValue = preDiscountAnnualValue - discountAmount;
+
+    const discountOutput = zaproCalculator.querySelector('[data-total="discount"]');
+    const discountRow = zaproCalculator.querySelector('[data-discount-row]');
+    if (discountOutput) discountOutput.textContent = discountAmount > 0 ? `-${euroFormatter.format(discountAmount)}` : euroFormatter.format(0);
+    if (discountRow) {
+      const showDiscountRow = billingMode === 'annual' && discountAmount > 0;
+      discountRow.hidden = !showDiscountRow;
+      discountRow.setAttribute('aria-hidden', String(!showDiscountRow));
     }
 
     const annualBillingTotal = calculateTotal('annual');
     const monthlyBillingTotal = calculateTotal('monthly');
     const annualSaving = monthlyBillingTotal - annualBillingTotal;
 
-    const estimatedMonthlyValue = Math.round(annualTotalValue / 12);
+    const estimatedMonthlyValue = Math.round(netAnnualValue / 12);
 
     if (billingMode === 'annual') {
       if (totalHeading) totalHeading.textContent = 'Estimated annual value';
-      if (totalPrimary) totalPrimary.textContent = `${euroFormatter.format(annualTotalValue)} / year`;
-      if (totalSecondary) totalSecondary.textContent = `Equivalent to ${euroFormatter.format(estimatedMonthlyValue)} / month`;
+      if (totalPrimary) totalPrimary.textContent = `${euroFormatter.format(netAnnualValue)} / year`;
+      if (totalSecondary) {
+        totalSecondary.textContent = discountAmount > 0
+          ? `After ${annualDiscountRateLabel(discountRate, discountSteps)}.`
+          : ``;
+      }
+      if (totalTercier) totalTercier.textContent = `Equivalent to ${euroFormatter.format(estimatedMonthlyValue)} / month`;
     } else {
       if (totalHeading) totalHeading.textContent = 'Estimated monthly value';
       if (totalPrimary) totalPrimary.textContent = `${euroFormatter.format(estimatedMonthlyValue)} / month`;
-      if (totalSecondary) totalSecondary.textContent = `Annualised value ${euroFormatter.format(annualTotalValue)} / year`;
+      if (totalSecondary) totalSecondary.textContent = ``;
+      if (totalTercier) totalTercier.textContent = `Annualised value ${euroFormatter.format(netAnnualValue)} / year`;
     }
 
     if (enterprisePriceButton) {
-      const shouldShowEnterpriseButton = annualTotalValue > enterpriseThreshold;
+      const shouldShowEnterpriseButton = netAnnualValue > enterpriseThreshold;
       enterprisePriceButton.hidden = !shouldShowEnterpriseButton;
       enterprisePriceButton.setAttribute('aria-hidden', String(!shouldShowEnterpriseButton));
     }
 
     if (pricingNote) {
-      if (annualSaving > 0) {
+      if (billingMode === 'annual' && discountAmount > 0) {
+        pricingNote.textContent = `Annual billing discount: ${annualDiscountRateLabel(discountRate, discountSteps)} on the pre-discount annual value of ${euroFormatter.format(preDiscountAnnualValue)}, reducing the estimate by ${euroFormatter.format(discountAmount)}.`;
+      } else if (annualSaving > 0) {
         pricingNote.textContent = billingMode === 'annual'
-          ? `Annual rates save ${euroFormatter.format(annualSaving)} per year compared with paying monthly and annualising the spend. L1 support is optional and scales by each started block of 100 total users.`
-          : `Switching to annual rates would reduce the annualised subscription by ${euroFormatter.format(annualSaving)}. L1 support is optional and scales by each started block of 100 total users.`;
+          ? `Annual rates save ${euroFormatter.format(annualSaving)} per year compared with paying monthly and annualising the spend. A 3.5% annual discount applies for each full ${euroFormatter.format(annualDiscountStepValue)} of pre-discount annual value, capped at ${Math.round(annualDiscountMaxRate * 100)}%.`
+          : `Switching to annual rates would reduce the annualised subscription by ${euroFormatter.format(annualSaving)}. Annual-rate discounts are applied only when Annual rates are selected.`;
       } else {
-        pricingNote.textContent = `Add user quantities to compare monthly annualised and annual subscription values. Optional services are added only when selected or when quantities are entered; L1 support scales by each started block of 100 total users.`;
+        pricingNote.textContent = `Add user quantities to compare monthly annualised and annual subscription values. Annual-rate discounts are applied only when Annual rates are selected, the pre-discount annual value reaches ${euroFormatter.format(annualDiscountStepValue)}, and the discount cap is ${Math.round(annualDiscountMaxRate * 100)}%.`;
       }
     }
   }

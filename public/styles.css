@@ -1068,6 +1068,29 @@ h3 {
   min-width: 160px;
 }
 
+.users-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+  color: var(--nwm-slate-dark);
+  font-weight: 700;
+}
+
+.users-control input {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border: 1px solid var(--nwm-border);
+  border-radius: 22px;
+  background: #fff;
+}
+
+.users-control span {
+  line-height: 1.2;
+  min-width:60px;
+}
+
 .item-pill {
   display: inline-flex;
   flex: 0 0 auto;
@@ -1136,7 +1159,7 @@ h3 {
 .calculator-total span {
   display: block;
   color: #fff;
-  font-size: clamp(3rem, 4.3vw, 4.3rem);
+  font-size: clamp(3rem, 4.0vw, 4.0rem);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: -0.06em;
@@ -1330,4 +1353,23 @@ h3 {
 
 .module-explainer {
   scroll-margin-top: 110px;
+}
+
+
+.calculator-topline p {
+  max-width: 460px;
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+
+.item-pill-discount {
+  background: rgba(183, 234, 243, 0.18);
+  color: var(--nwm-aqua-light);
+}
+
+.discount-row strong {
+  color: var(--nwm-aqua-light);
 }
