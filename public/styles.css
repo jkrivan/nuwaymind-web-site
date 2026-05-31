@@ -1136,7 +1136,7 @@ h3 {
 .calculator-total span {
   display: block;
   color: #fff;
-  font-size: clamp(3rem, 6.0vw, 5.6rem);
+  font-size: clamp(3rem, 4.5vw, 4.5rem);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: -0.06em;
