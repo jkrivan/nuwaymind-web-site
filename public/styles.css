@@ -1136,7 +1136,7 @@ h3 {
 .calculator-total span {
   display: block;
   color: #fff;
-  font-size: clamp(3rem, 7vw, 5.6rem);
+  font-size: clamp(3rem, 6.0vw, 5.6rem);
   font-weight: 700;
   line-height: 0.96;
   letter-spacing: -0.06em;
@@ -1146,7 +1146,7 @@ h3 {
   display: block;
   margin-top: 12px;
   color: rgba(255, 255, 255, 0.74);
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .cost-breakdown {
@@ -1320,4 +1320,14 @@ h3 {
   .module-section {
     padding: 24px;
   }
+}
+
+
+/* Monthly-first calculator total */
+.calculator-total small {
+  letter-spacing: -0.015em;
+}
+
+.module-explainer {
+  scroll-margin-top: 110px;
 }

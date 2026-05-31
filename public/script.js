@@ -109,8 +109,9 @@ if (zaproCalculator) {
   const quantityInputs = Array.from(zaproCalculator.querySelectorAll('[data-calc-input]'));
   const optionInputs = Array.from(zaproCalculator.querySelectorAll('[data-calc-option]'));
   const resetButton = zaproCalculator.querySelector('[data-calc-reset]');
-  const totalAnnual = zaproCalculator.querySelector('[data-total-annual]');
-  const totalMonthly = zaproCalculator.querySelector('[data-total-monthly]');
+  const totalHeading = zaproCalculator.querySelector('[data-total-heading]');
+  const totalPrimary = zaproCalculator.querySelector('[data-total-primary]');
+  const totalSecondary = zaproCalculator.querySelector('[data-total-secondary]');
   const pricingNote = zaproCalculator.querySelector('[data-pricing-note]');
   const enterprisePriceButton = zaproCalculator.querySelector('[data-enterprise-price]');
   const l1SupportBasis = zaproCalculator.querySelector('[data-l1-support-basis]');
@@ -133,6 +134,11 @@ if (zaproCalculator) {
     return userModuleKeys.reduce((sum, moduleKey) => sum + quantityForModule(moduleKey), 0);
   }
 
+  function l1SupportBlocks() {
+    const users = totalUserCount();
+    return users > 0 ? Math.ceil(users / 100) : 0;
+  }
+
   function isOptionSelected(optionKey) {
     const input = optionInputs.find((item) => item.dataset.calcOption === optionKey);
     return Boolean(input && input.checked);
@@ -140,7 +146,11 @@ if (zaproCalculator) {
 
   function l1SupportCost(billingMode) {
     if (!isOptionSelected('l1Support')) return 0;
-    return billingMode === 'monthly' ? l1SupportMonthlyPrice * 12 : l1SupportAnnualPrice;
+    const supportBlocks = l1SupportBlocks();
+    if (supportBlocks === 0) return 0;
+    return billingMode === 'monthly'
+      ? supportBlocks * l1SupportMonthlyPrice * 12
+      : supportBlocks * l1SupportAnnualPrice;
   }
 
   function annualModuleCost(moduleKey, quantity, billingMode) {
@@ -165,8 +175,8 @@ if (zaproCalculator) {
       if (!label) return;
       if (moduleKey === 'l1Support') {
         label.textContent = billingMode === 'monthly'
-          ? `${euroFormatter.format(price.monthly)} per month`
-          : `${euroFormatter.format(price.annual)} per year`;
+          ? `${euroFormatter.format(price.monthly)} per month per 100 users`
+          : `${euroFormatter.format(price.annual)} per year per 100 users`;
         return;
       }
       if (price.billingIndependent) {
@@ -205,17 +215,30 @@ if (zaproCalculator) {
     if (l1SupportOutput) l1SupportOutput.textContent = euroFormatter.format(currentL1SupportCost);
 
     if (l1SupportBasis) {
+      const users = totalUserCount();
+      const supportBlocks = l1SupportBlocks();
       l1SupportBasis.textContent = isOptionSelected('l1Support')
-        ? `Included as optional service → ${euroFormatter.format(currentL1SupportCost)} annual cost`
-        : 'Optional service excluded from the estimate unless selected';
+        ? supportBlocks > 0
+          ? `Selected for ${users} total user${users === 1 ? '' : 's'} → ${supportBlocks} support block${supportBlocks === 1 ? '' : 's'} of 100 users = ${euroFormatter.format(currentL1SupportCost)} annual cost`
+          : 'Selected, but no user quantities entered yet'
+        : 'Optional service: When selected, it scales by each started block of 100 total users.';
     }
 
     const annualBillingTotal = calculateTotal('annual');
     const monthlyBillingTotal = calculateTotal('monthly');
     const annualSaving = monthlyBillingTotal - annualBillingTotal;
 
-    totalAnnual.textContent = euroFormatter.format(annualTotalValue);
-    totalMonthly.textContent = `Equivalent to ${euroFormatter.format(Math.round(annualTotalValue / 12))} / month`;
+    const estimatedMonthlyValue = Math.round(annualTotalValue / 12);
+
+    if (billingMode === 'annual') {
+      if (totalHeading) totalHeading.textContent = 'Estimated annual value';
+      if (totalPrimary) totalPrimary.textContent = `${euroFormatter.format(annualTotalValue)} / year`;
+      if (totalSecondary) totalSecondary.textContent = `Equivalent to ${euroFormatter.format(estimatedMonthlyValue)} / month`;
+    } else {
+      if (totalHeading) totalHeading.textContent = 'Estimated monthly value';
+      if (totalPrimary) totalPrimary.textContent = `${euroFormatter.format(estimatedMonthlyValue)} / month`;
+      if (totalSecondary) totalSecondary.textContent = `Annualised value ${euroFormatter.format(annualTotalValue)} / year`;
+    }
 
     if (enterprisePriceButton) {
       const shouldShowEnterpriseButton = annualTotalValue > enterpriseThreshold;
@@ -226,10 +249,10 @@ if (zaproCalculator) {
     if (pricingNote) {
       if (annualSaving > 0) {
         pricingNote.textContent = billingMode === 'annual'
-          ? `Annual rates save ${euroFormatter.format(annualSaving)} per year compared with paying monthly and annualising the spend. L1 support is optional and added only when selected.`
-          : `Switching to annual rates would reduce the annualised subscription by ${euroFormatter.format(annualSaving)}. L1 support is optional and added only when selected.`;
+          ? `Annual rates save ${euroFormatter.format(annualSaving)} per year compared with paying monthly and annualising the spend. L1 support is optional and scales by each started block of 100 total users.`
+          : `Switching to annual rates would reduce the annualised subscription by ${euroFormatter.format(annualSaving)}. L1 support is optional and scales by each started block of 100 total users.`;
       } else {
-        pricingNote.textContent = `Add user quantities to compare monthly annualised and annual subscription values. Optional services are added only when selected or when quantities are entered.`;
+        pricingNote.textContent = `Add user quantities to compare monthly annualised and annual subscription values. Optional services are added only when selected or when quantities are entered; L1 support scales by each started block of 100 total users.`;
       }
     }
   }

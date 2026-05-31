@@ -19,15 +19,17 @@
           <img src="images/nuwaymind-logo.png" alt="NuWayMind" width="300"/>
       </a>
 
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle> </button>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-nav-toggle>
+        <span></span><span></span><span></span>
+      </button>
 
       <div class="nav-links" data-nav-links>
         <a href="#services">Services</a>
         <a href="#framework">Framework</a>
         <a href="#zapro">ZAPRO</a>
-        <a href="#pricing">Pricing</a>
         <a href="#process">Process</a>
         <a href="#approach">Approach</a>
+        <a href="#pricing">Pricing</a>
         <a class="nav-cta" href="#contact">Book a call</a>
       </div>
     </nav>
@@ -204,12 +206,63 @@
 
 
 
+    <section class="section" id="process">
+      <div class="shell">
+        <div class="section-heading centered reveal">
+          <p class="eyebrow">Reference workflow</p>
+          <h2>From demand to payment: one controlled business process.</h2>
+          <p>A business-led workflow that connects demand, supplier selection, commitments, receipt, invoice control and performance review.</p>
+        </div>
+
+        <div class="process-line reveal" aria-label="End-to-end procurement workflow">
+          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Qualify</strong><small>Supplier data, risk and ownership</small></div>
+          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Source</strong><small>Competition, TCO and decisions</small></div>
+          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Contract</strong><small>Terms, obligations and value</small></div>
+          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Commit</strong><small>PR, PO, budget and approvals</small></div>
+          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Receive</strong><small>Delivery, acceptance and evidence</small></div>
+          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Pay & Improve</strong><small>Matching, analytics and actions</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section muted" id="approach">
+      <div class="shell approach-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">How we deliver</p>
+          <h2>Diagnose business impact. Design controls. Execute adoption.</h2>
+        </div>
+        <div class="approach-list">
+          <article class="approach-item reveal">
+            <img src="images/home.png" class="topic-chip" alt="NuWayMind" width="64"/>
+            <div>
+              <h3>Business diagnosis</h3>
+              <p>Identify where spend leakage, process delays, supplier risk and missing evidence affect financial and operational performance.</p>
+            </div>
+          </article>
+          <article class="approach-item reveal">
+            <img src="images/home.png" class="topic-chip" alt="NuWayMind" width="64"/>
+            <div>
+              <h3>Control design</h3>
+              <p>Define decision rights, approval thresholds, workflows, KPIs and exception rules that support the business rather than slow it down.</p>
+            </div>
+          </article>
+          <article class="approach-item reveal">
+            <img src="images/home.png" class="topic-chip" alt="NuWayMind" width="64"/>
+            <div>
+              <h3>Adoption rollout</h3>
+              <p>Deploy by entity, category or risk level, enable users and track performance until the new way of working becomes routine.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section class="section muted zapro-pricing" id="pricing" aria-labelledby="zapro-pricing-title">
       <div class="shell">
         <div class="section-heading centered reveal">
           <p class="eyebrow">ZAPRO subscription calculator</p>
-          <h2 id="zapro-pricing-title">Digital Procurement<br/>annual subscription cost</h2>
-          <p>Calculate the estimated yearly subscription value from the fixed platform fee, selected user modules and optional add-ons.</p>
+          <h2 id="zapro-pricing-title">Digital Procurement<br/>subscription cost</h2>
+          <p>Calculate the estimated monthly and annual subscription value from the fixed platform fee, selected user modules and optional add-on services.</p>
         </div>
 
         <div class="pricing-calculator reveal" data-zapro-calculator>
@@ -267,12 +320,12 @@
 
               <label class="calc-field calc-field-derived calc-field-option" for="zapro-l1-support">
                 <span class="calc-field-title"><span>L1 support</span><em class="item-pill item-pill-addon">Add-on</em></span>
-                <small data-rate-label="l1Support">€11,000 per year</small>
+                <small data-rate-label="l1Support">€11,000 per year / 100 users</small>
                 <span class="checkbox-control">
                   <span>L1 support service</span>
                   <input id="zapro-l1-support" type="checkbox" data-calc-option="l1Support" />
                 </span>
-                <p data-l1-support-basis>Optional service excluded from the estimate unless selected</p>
+                <p data-l1-support-basis>Optional service, when selected, it scales by each started block of 100 total users.</p>
               </label>
             </div>
 
@@ -280,10 +333,10 @@
           </div>
 
           <div class="calculator-panel calculator-results" aria-live="polite">
-            <p class="eyebrow">Estimated annual value</p>
+            <p class="eyebrow" data-total-heading>Estimated annual value</p>
             <div class="calculator-total">
-              <span data-total-annual>€23,750</span>
-              <small data-total-monthly>Equivalent to €1,979 / month</small>
+              <span data-total-primary>€23,750 / year</span>
+              <small data-total-secondary>Equivalent to €1,979 / month</small>
             </div>
 
             <div class="cost-breakdown" aria-label="ZAPRO cost breakdown">
@@ -324,59 +377,132 @@
             </div>
           </div>
         </div>
+
+        <div class="module-explainer reveal" aria-labelledby="module-explainer-title">
+          <div class="section-heading centered">
+            <p class="eyebrow">ZAPRO module overview</p>
+            <h3 id="module-explainer-title">What is included in each pricing item.</h3>
+            <p>A practical overview of the fixed platform layer, user modules and optional services used in the subscription estimate.</p>
+          </div>
+
+          <div class="module-sections" aria-label="ZAPRO module descriptions">
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-core">Core</span>
+                <h4>Platform annual fee</h4>
+                <p class="module-price">€10,000 per year</p>
+              </div>
+              <div class="module-section-body">
+                <p>The platform fee covers the shared ZAPRO environment used to run workflows, approvals, user access, audit trail and reporting across selected modules.</p>
+                <ul>
+                  <li>Central system layer for configuration, permissions, workflows and approval logic.</li>
+                  <li>Common audit trail for commercial decisions, user actions and transaction evidence.</li>
+                  <li>Foundation for connecting S2C, P2P, O2C, Inventory, T&amp;E and supplier-facing processes.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-core">Core</span>
+                <h4>O2C users</h4>
+                <p class="module-price">€50 per user / month or €550 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>O2C supports customer-side commercial execution, from order handling and fulfilment visibility to finance-ready transaction control.</p>
+                <ul>
+                  <li>Helps align sales, operations and finance around customer order status.</li>
+                  <li>Improves visibility of revenue-related activities and bottlenecks.</li>
+                  <li>Creates a structured record for customer demand, order progress and follow-up.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-core">Core</span>
+                <h4>S2C + P2P users</h4>
+                <p class="module-price">€50 per user / month or €550 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>S2C + P2P is the main procurement control module, covering supplier selection, sourcing, contracts, requisitions, purchase orders, receipts and invoice control.</p>
+                <ul>
+                  <li>Supports sourcing decisions, supplier comparison and contract-linked purchasing.</li>
+                  <li>Connects PR, PO, goods receipt and invoice validation into one governed flow.</li>
+                  <li>Improves spend control before commitments become invoices or payment requests.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>Inventory management</h4>
+                <p class="module-price">€25 per user / month or €275 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>Inventory management extends procurement control into stock visibility, replenishment discipline and receipt-based inventory follow-up.</p>
+                <ul>
+                  <li>Links purchasing activity with stock availability and operational demand.</li>
+                  <li>Supports better control over ordered, received and available quantities.</li>
+                  <li>Helps reduce emergency buying, duplication and stock-related process gaps.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>T&amp;E</h4>
+                <p class="module-price">€10 per user / month or €110 per user / year</p>
+              </div>
+              <div class="module-section-body">
+                <p>T&amp;E supports controlled handling of travel and expense requests with approval evidence, documentation and policy visibility.</p>
+                <ul>
+                  <li>Structures employee claims, supporting documentation and approval status.</li>
+                  <li>Gives managers and finance a clearer view of expense decisions.</li>
+                  <li>Reduces fragmented email-based follow-up for travel and reimbursement topics.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>Vendor onboarding support</h4>
+                <p class="module-price">€7 per vendor</p>
+              </div>
+              <div class="module-section-body">
+                <p>Vendor onboarding support helps activate suppliers into the platform and prepare them for supplier-facing transactions.</p>
+                <ul>
+                  <li>Supports onboarding communication, registration guidance and completion follow-up.</li>
+                  <li>Improves supplier data readiness before PO, delivery note and invoice usage.</li>
+                  <li>Reduces internal workload during rollout and supplier activation.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="module-section">
+              <div class="module-section-meta">
+                <span class="item-pill item-pill-addon">Add-on</span>
+                <h4>L1 support</h4>
+                <p class="module-price">€1,000 per month or €11,000 per year per started 100 users</p>
+              </div>
+              <div class="module-section-body">
+                <p>L1 support is an optional first-line service for basic user questions, initial issue triage and practical adoption support. It scales with adoption: every started block of 100 total users adds one L1 support block.</p>
+                <ul>
+                  <li>Provides a first contact point for common navigation and process questions.</li>
+                  <li>Calculates support capacity from total selected users across O2C, S2C + P2P, Inventory and T&amp;E.</li>
+                  <li>Applies one support block for 1–100 users, two blocks for 101–200 users, and continues in the same structure.</li>
+                  <li>Filters user guidance topics from issues requiring deeper escalation and supports adoption after rollout.</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="section" id="process">
-      <div class="shell">
-        <div class="section-heading centered reveal">
-          <p class="eyebrow">Reference workflow</p>
-          <h2>From demand to payment: one controlled business process.</h2>
-          <p>A business-led workflow that connects demand, supplier selection, commitments, receipt, invoice control and performance review.</p>
-        </div>
-
-        <div class="process-line reveal" aria-label="End-to-end procurement workflow">
-          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Qualify</strong><small>Supplier data, risk and ownership</small></div>
-          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Source</strong><small>Competition, TCO and decisions</small></div>
-          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Contract</strong><small>Terms, obligations and value</small></div>
-          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Commit</strong><small>PR, PO, budget and approvals</small></div>
-          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Receive</strong><small>Delivery, acceptance and evidence</small></div>
-          <div class="process-step"><img src="images/home.png" class="topic-chip" alt="NuWayMind" width="40"/><strong>Pay & Improve</strong><small>Matching, analytics and actions</small></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section muted" id="approach">
-      <div class="shell approach-grid">
-        <div class="section-heading reveal">
-          <p class="eyebrow">How we deliver</p>
-          <h2>Diagnose business impact. Design controls. Execute adoption.</h2>
-        </div>
-        <div class="approach-list">
-          <article class="approach-item reveal">
-            <img src="images/home.png" class="topic-chip" alt="NuWayMind" width="64"/>
-            <div>
-              <h3>Business diagnosis</h3>
-              <p>Identify where spend leakage, process delays, supplier risk and missing evidence affect financial and operational performance.</p>
-            </div>
-          </article>
-          <article class="approach-item reveal">
-            <img src="images/home.png" class="topic-chip" alt="NuWayMind" width="64"/>
-            <div>
-              <h3>Control design</h3>
-              <p>Define decision rights, approval thresholds, workflows, KPIs and exception rules that support the business rather than slow it down.</p>
-            </div>
-          </article>
-          <article class="approach-item reveal">
-            <img src="images/home.png" class="topic-chip" alt="NuWayMind" width="64"/>
-            <div>
-              <h3>Adoption rollout</h3>
-              <p>Deploy by entity, category or risk level, enable users and track performance until the new way of working becomes routine.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
 
     <section class="section contact" id="contact">
       <div class="shell contact-grid">
