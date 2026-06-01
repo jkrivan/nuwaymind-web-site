@@ -63,16 +63,16 @@ filterButtons.forEach((button) => {
   });
 });
 
-contactForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const emailValue = contactForm.querySelector('#email').value.trim();
-  const goalValue = contactForm.querySelector('#goal').value.trim();
-  const subject = encodeURIComponent('NuWayMind enquiry');
-  const body = encodeURIComponent(`Hello NuWayMind,\n\nMy email: ${emailValue}\n\nWhat I am aiming to improve:\n${goalValue}\n\nRegards,`);
-
-  window.location.href = `mailto:info@nuwaymind.com?subject=${subject}&body=${body}`;
-});
+//contactForm.addEventListener('submit', (event) => {
+//  event.preventDefault();
+//
+//  const emailValue = contactForm.querySelector('#email').value.trim();
+//  const goalValue = contactForm.querySelector('#goal').value.trim();
+//  const subject = encodeURIComponent('NuWayMind enquiry');
+//  const body = encodeURIComponent(`Hello NuWayMind,\n\nMy email: ${emailValue}\n\nWhat I am aiming to improve:\n${goalValue}\n\nRegards,`);
+//
+//  window.location.href = `mailto:info@nuwaymind.com?subject=${subject}&body=${body}`;
+//});
 
 window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('resize', () => {
