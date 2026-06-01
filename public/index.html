@@ -479,11 +479,14 @@
 <strong data-total="discount">-€0</strong>
 </div>
 </div>
-<a class="btn btn-primary enterprise-price-btn" data-enterprise-price="" hidden="" href="#contact">Ask for individual enterprise price</a>
+<a class="btn btn-primary enterprise-price-btn" data-enterprise-price="" data-proposal-need="6" hidden="" href="#contact">Ask for individual enterprise price</a>
 <div class="pricing-note" data-pricing-note="">
               Annual rates may include a volume discount. The discount is calculated only for annual billing and equals 3.5% for each full €100,000 of pre-discount annual value, capped at 42%.
             </div>
 </div>
+</div>
+<div class="calculator-proposal-action reveal">
+<a class="btn btn-secondary proposal-price-btn" data-proposal-need="6" href="#contact">Request proposal from this estimate</a>
 </div>
 <div aria-labelledby="module-explainer-title" class="module-explainer reveal">
 <div class="section-heading centered">
@@ -620,12 +623,102 @@
 </ul>
 </div>
 </div>
-<form class="contact-form reveal" name="contact" netlify>
-<label for="email">Your email</label>
-<input id="email" name="email" placeholder="name@company.com" required="" type="email"/>
-<label for="goal">What business outcome should procurement improve?</label>
-<textarea id="goal" name="goal" placeholder="Example: reduce spend leakage, improve supplier control, accelerate approvals, prepare for audit, roll out ZAPRO..." rows="6"></textarea>
-<button class="btn btn-primary" type="submit">Send</button>
+<form class="contact-form proposal-form reveal" id="proposalRequestForm" name="individual-proposal-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-contact-form="">
+<input type="hidden" name="form-name" value="individual-proposal-request"/>
+<input type="hidden" name="business_needs_summary" id="nf_business_needs_summary"/>
+<input type="hidden" name="question_6_calculator_context" id="nf_question_6_calculator_context"/>
+<p class="hidden-field"><label>Do not fill this field: <input name="bot-field"/></label></p>
+<input type="hidden" name="calculator_billing_basis" id="nf_calc_billing_basis"/>
+<input type="hidden" name="calculator_o2c_users" id="nf_calc_o2c_users"/>
+<input type="hidden" name="calculator_s2c_p2p_users" id="nf_calc_s2c_p2p_users"/>
+<input type="hidden" name="calculator_inventory_users" id="nf_calc_inventory_users"/>
+<input type="hidden" name="calculator_te_users" id="nf_calc_te_users"/>
+<input type="hidden" name="calculator_vendor_onboarding_count" id="nf_calc_vendor_onboarding_count"/>
+<input type="hidden" name="calculator_l1_support_selected" id="nf_calc_l1_support_selected"/>
+<input type="hidden" name="calculator_total_users" id="nf_calc_total_users"/>
+<input type="hidden" name="calculator_platform_fee" id="nf_calc_platform_fee"/>
+<input type="hidden" name="calculator_o2c_cost" id="nf_calc_o2c_cost"/>
+<input type="hidden" name="calculator_s2c_p2p_cost" id="nf_calc_s2c_p2p_cost"/>
+<input type="hidden" name="calculator_inventory_cost" id="nf_calc_inventory_cost"/>
+<input type="hidden" name="calculator_te_cost" id="nf_calc_te_cost"/>
+<input type="hidden" name="calculator_vendor_onboarding_cost" id="nf_calc_vendor_onboarding_cost"/>
+<input type="hidden" name="calculator_l1_support_cost" id="nf_calc_l1_support_cost"/>
+<input type="hidden" name="calculator_discount" id="nf_calc_discount"/>
+<input type="hidden" name="calculator_primary_total" id="nf_calc_primary_total"/>
+<input type="hidden" name="calculator_reference_total" id="nf_calc_reference_total"/>
+<input type="hidden" name="calculator_note" id="nf_calc_note"/>
+<input type="hidden" name="calculator_summary" id="nf_calc_summary"/>
+<div class="proposal-form__grid">
+<div class="proposal-form__group proposal-form__group--full">
+<span class="proposal-form__label">What do you want to improve?</span>
+<p class="proposal-form__hint">Select one or more business needs. If you select question 6, or use the calculator proposal button, the current calculator estimate is attached automatically.</p>
+<div class="business-need-grid" data-business-need-checkboxes="">
+<label class="business-need-option"><input type="checkbox" name="business_needs" value="We want to define a clearer procurement strategy that supports business growth, cost control, cash management and risk reduction." data-need-number="1"/><span><strong>1.</strong> We want to define a clearer procurement strategy that supports business growth, cost control, cash management and risk reduction.</span></label>
+<label class="business-need-option"><input type="checkbox" name="business_needs" value="We want better control over company spending and to reduce unnecessary, uncontrolled or poorly visible costs." data-need-number="2"/><span><strong>2.</strong> We want better control over company spending and to reduce unnecessary, uncontrolled or poorly visible costs.</span></label>
+<label class="business-need-option"><input type="checkbox" name="business_needs" value="We want purchasing to be more organised, with clear responsibilities, approval rules and decision-making across the business." data-need-number="3"/><span><strong>3.</strong> We want purchasing to be more organised, with clear responsibilities, approval rules and decision-making across the business.</span></label>
+<label class="business-need-option"><input type="checkbox" name="business_needs" value="We want to reduce business risk by having better supplier checks, documentation, compliance control and audit evidence." data-need-number="4"/><span><strong>4.</strong> We want to reduce business risk by having better supplier checks, documentation, compliance control and audit evidence.</span></label>
+<label class="business-need-option"><input type="checkbox" name="business_needs" value="We want to improve how we select suppliers, negotiate, manage contracts, monitor performance and avoid missed renewals." data-need-number="5"/><span><strong>5.</strong> We want to improve how we select suppliers, negotiate, manage contracts, monitor performance and avoid missed renewals.</span></label>
+<label class="business-need-option business-need-option--calculator"><input type="checkbox" name="business_needs" value="We want a simple system to manage purchase requests, approvals, orders, invoices, inventory or travel expenses." data-need-number="6" data-calculator-linked="true"/><span><strong>6.</strong> We want a simple system to manage purchase requests, approvals, orders, invoices, inventory or travel expenses.<em>Calculator estimate attached</em></span></label>
+<label class="business-need-option"><input type="checkbox" name="business_needs" value="We want support with setting up better processes, connecting systems, training users and helping suppliers work with us digitally." data-need-number="7"/><span><strong>7.</strong> We want support with setting up better processes, connecting systems, training users and helping suppliers work with us digitally.</span></label>
+<label class="business-need-option"><input type="checkbox" name="business_needs" value="We want an as-is assessment of our current procurement setup through consulting services, including process maturity, control gaps, spend visibility, supplier governance and practical improvement priorities." data-need-number="8"/><span><strong>8.</strong> We want an as-is assessment of our current procurement setup through consulting services, including process maturity, control gaps, spend visibility, supplier governance and practical improvement priorities.</span></label>
+</div>
+</div>
+<div class="proposal-form__group">
+<label for="proposal-industry">Industry</label>
+<select id="proposal-industry" name="industry">
+<option value="">Select industry</option>
+<option value="Pharmaceutical &amp; MedTech">Pharmaceutical &amp; MedTech</option>
+<option value="FMCG">FMCG</option>
+<option value="e-Commerce &amp; Retail">e-Commerce &amp; Retail</option>
+<option value="Law Firms">Law Firms</option>
+<option value="Healthcare Providers &amp; Clinical Groups">Healthcare Providers &amp; Clinical Groups</option>
+<option value="Manufacturing &amp; Industrial Operations">Manufacturing &amp; Industrial Operations</option>
+<option value="Construction &amp; Project-Based Business">Construction &amp; Project-Based Business</option>
+<option value="Financial Services &amp; Insurance">Financial Services &amp; Insurance</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div class="proposal-form__group">
+<label for="proposal-company-size">Company size</label>
+<select id="proposal-company-size" name="company_size">
+<option value="">Select company size</option>
+<option value="1-50 employees">1–50 employees</option>
+<option value="51-250 employees">51–250 employees</option>
+<option value="251-1000 employees">251–1,000 employees</option>
+<option value="1001-5000 employees">1,001–5,000 employees</option>
+<option value="5000+ employees">5,000+ employees</option>
+</select>
+</div>
+<div class="proposal-form__group">
+<label for="proposal-company">Company name</label>
+<input id="proposal-company" name="company" placeholder="Company name" required="" type="text" autocomplete="organization"/>
+</div>
+<div class="proposal-form__group">
+<label for="proposal-name">Contact person</label>
+<input id="proposal-name" name="contact_name" placeholder="Name and surname" type="text" autocomplete="name"/>
+</div>
+<div class="proposal-form__group">
+<label for="proposal-email">Business email</label>
+<input id="proposal-email" name="email" placeholder="name@company.com" required="" type="email" autocomplete="email"/>
+</div>
+<div class="proposal-form__group">
+<label for="proposal-phone">Phone</label>
+<input id="proposal-phone" name="phone" placeholder="Optional" type="tel" autocomplete="tel"/>
+</div>
+<div class="proposal-form__group proposal-form__group--full">
+<label for="proposal-goal">Additional context for the individual proposal</label>
+<textarea id="proposal-goal" name="goal" placeholder="Example: We operate across several entities and need stronger control over approvals, suppliers and invoice evidence." rows="5"></textarea>
+</div>
+<div class="proposal-form__group proposal-form__group--full proposal-form__consent">
+<label>
+<input type="checkbox" name="consent_to_contact" value="Yes" required=""/>
+<span>I agree to be contacted about this proposal request.</span>
+</label>
+</div>
+</div>
+<div class="proposal-calculator-preview" data-proposal-calculator-preview="">Calculator values will be attached automatically when the visitor uses the pricing calculator.</div>
+<button class="btn btn-primary proposal-form__submit" type="submit">Send proposal request</button>
+<p class="form-note">Selected business needs and, when relevant, the current calculator estimate are submitted together through Netlify Forms.</p>
 </form>
 </div>
 </section>

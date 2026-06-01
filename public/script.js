@@ -355,3 +355,222 @@ if (zaproCalculator) {
 
   updateCalculator();
 }
+
+
+/* Netlify proposal request form — capture selected business needs and ZAPRO calculator estimate */
+(function () {
+  const proposalForm = document.getElementById('proposalRequestForm');
+  if (!proposalForm) return;
+
+  const zaproCalculator = document.querySelector('[data-zapro-calculator]');
+  const businessNeedInputs = Array.from(proposalForm.querySelectorAll('input[name="business_needs"]'));
+  const calculatorNeedInput = proposalForm.querySelector('input[data-calculator-linked="true"]');
+  const preview = document.querySelector('[data-proposal-calculator-preview]');
+
+  function textFrom(selector, root = document) {
+    const element = root.querySelector(selector);
+    return element ? element.textContent.replace(/\s+/g, ' ').trim() : '';
+  }
+
+  function inputValue(selector, root = document) {
+    const element = root.querySelector(selector);
+    return element ? element.value : '';
+  }
+
+  function checkedText(selector, root = document) {
+    const element = root.querySelector(selector);
+    return element ? element.value : '';
+  }
+
+  function numberValue(value) {
+    const number = Number.parseInt(value, 10);
+    return Number.isFinite(number) && number > 0 ? number : 0;
+  }
+
+  function totalUsers(data) {
+    return numberValue(data.o2cUsers) + numberValue(data.s2cP2pUsers) + numberValue(data.inventoryUsers) + numberValue(data.teUsers);
+  }
+
+  function selectedBusinessNeeds() {
+    return businessNeedInputs
+      .filter((input) => input.checked)
+      .map((input) => {
+        const number = input.getAttribute('data-need-number');
+        return `${number ? `${number}. ` : ''}${input.value}`;
+      })
+      .filter(Boolean);
+  }
+
+  function isCalculatorNeedSelected() {
+    return Boolean(calculatorNeedInput?.checked);
+  }
+
+  function setBusinessNeedSelection(needNumber) {
+    if (!needNumber) return;
+    const match = businessNeedInputs.find((input) => input.getAttribute('data-need-number') === String(needNumber));
+    if (match) match.checked = true;
+  }
+
+  function setHiddenValue(id, value) {
+    const field = document.getElementById(id);
+    if (field) field.value = value == null ? '' : String(value);
+  }
+
+  function syncSelectedBusinessNeedsToForm() {
+    const needs = selectedBusinessNeeds();
+    setHiddenValue('nf_business_needs_summary', needs.length ? needs.join(' | ') : 'Not selected');
+    return needs;
+  }
+
+  function buildCalculatorContext(data) {
+    return [
+      `Question 6 calculator-linked need selected: ${isCalculatorNeedSelected() ? 'Yes' : 'No'}`,
+      `Billing basis: ${data.billingBasis}`,
+      `O2C users: ${data.o2cUsers}`,
+      `S2C + P2P users: ${data.s2cP2pUsers}`,
+      `Inventory users: ${data.inventoryUsers}`,
+      `T&E users: ${data.teUsers}`,
+      `Vendor onboarding: ${data.vendorOnboardingCount}`,
+      `L1 support: ${data.l1SupportSelected}`,
+      `Total users: ${data.totalUsers}`,
+      `Platform fee: ${data.platformFee || 'Not calculated'}`,
+      `Discount: ${data.discount || 'Not applied'}`,
+      `Total: ${data.primaryTotal || 'Not calculated'}`,
+      data.referenceTotal || ''
+    ].filter(Boolean).join(' | ');
+  }
+
+  function readCalculatorData() {
+    const needs = syncSelectedBusinessNeedsToForm();
+
+    if (!zaproCalculator) {
+      return {
+        billingBasis: 'Calculator not found',
+        o2cUsers: 0,
+        s2cP2pUsers: 0,
+        inventoryUsers: 0,
+        teUsers: 0,
+        vendorOnboardingCount: 0,
+        l1SupportSelected: 'No',
+        totalUsers: 0,
+        platformFee: '',
+        o2cCost: '',
+        s2cP2pCost: '',
+        inventoryCost: '',
+        teCost: '',
+        vendorOnboardingCost: '',
+        l1SupportCost: '',
+        discount: '',
+        primaryTotal: '',
+        referenceTotal: '',
+        note: '',
+        calculatorContext: 'Calculator was not available on the page.',
+        summary: `Business needs: ${needs.length ? needs.join(', ') : 'Not selected'} | Calculator was not available on the page.`
+      };
+    }
+
+    const data = {
+      billingBasis: checkedText('input[name="zapro-billing"]:checked', zaproCalculator) || 'annual',
+      o2cUsers: inputValue('[data-calc-input="o2c"]', zaproCalculator) || '0',
+      s2cP2pUsers: inputValue('[data-calc-input="s2cp2p"]', zaproCalculator) || '0',
+      inventoryUsers: inputValue('[data-calc-input="inventory"]', zaproCalculator) || '0',
+      teUsers: inputValue('[data-calc-input="te"]', zaproCalculator) || '0',
+      vendorOnboardingCount: inputValue('[data-calc-input="vendorOnboarding"]', zaproCalculator) || '0',
+      l1SupportSelected: zaproCalculator.querySelector('[data-calc-option="l1Support"]')?.checked ? 'Yes' : 'No',
+      platformFee: textFrom('[data-total="platform"]', zaproCalculator),
+      o2cCost: textFrom('[data-total="o2c"]', zaproCalculator),
+      s2cP2pCost: textFrom('[data-total="s2cp2p"]', zaproCalculator),
+      inventoryCost: textFrom('[data-total="inventory"]', zaproCalculator),
+      teCost: textFrom('[data-total="te"]', zaproCalculator),
+      vendorOnboardingCost: textFrom('[data-total="vendorOnboarding"]', zaproCalculator),
+      l1SupportCost: textFrom('[data-total="l1Support"]', zaproCalculator),
+      discount: textFrom('[data-total="discount"]', zaproCalculator),
+      primaryTotal: textFrom('[data-total-primary]', zaproCalculator),
+      referenceTotal: textFrom('[data-total-tercier]', zaproCalculator),
+      note: textFrom('[data-pricing-note]', zaproCalculator)
+    };
+
+    data.totalUsers = totalUsers(data);
+    data.calculatorContext = buildCalculatorContext(data);
+    data.summary = [
+      `Business needs: ${needs.length ? needs.join(', ') : 'Not selected'}`,
+      isCalculatorNeedSelected() ? `Question 6 calculator data: ${data.calculatorContext}` : 'Question 6 calculator data: not requested',
+      data.note ? `Pricing note: ${data.note}` : ''
+    ].filter(Boolean).join(' | ');
+
+    return data;
+  }
+
+  function syncCalculatorDataToForm() {
+    const data = readCalculatorData();
+    const includeCalculatorData = isCalculatorNeedSelected();
+
+    setHiddenValue('nf_calc_billing_basis', includeCalculatorData ? data.billingBasis : '');
+    setHiddenValue('nf_calc_o2c_users', includeCalculatorData ? data.o2cUsers : '');
+    setHiddenValue('nf_calc_s2c_p2p_users', includeCalculatorData ? data.s2cP2pUsers : '');
+    setHiddenValue('nf_calc_inventory_users', includeCalculatorData ? data.inventoryUsers : '');
+    setHiddenValue('nf_calc_te_users', includeCalculatorData ? data.teUsers : '');
+    setHiddenValue('nf_calc_vendor_onboarding_count', includeCalculatorData ? data.vendorOnboardingCount : '');
+    setHiddenValue('nf_calc_l1_support_selected', includeCalculatorData ? data.l1SupportSelected : '');
+    setHiddenValue('nf_calc_total_users', includeCalculatorData ? data.totalUsers : '');
+    setHiddenValue('nf_calc_platform_fee', includeCalculatorData ? data.platformFee : '');
+    setHiddenValue('nf_calc_o2c_cost', includeCalculatorData ? data.o2cCost : '');
+    setHiddenValue('nf_calc_s2c_p2p_cost', includeCalculatorData ? data.s2cP2pCost : '');
+    setHiddenValue('nf_calc_inventory_cost', includeCalculatorData ? data.inventoryCost : '');
+    setHiddenValue('nf_calc_te_cost', includeCalculatorData ? data.teCost : '');
+    setHiddenValue('nf_calc_vendor_onboarding_cost', includeCalculatorData ? data.vendorOnboardingCost : '');
+    setHiddenValue('nf_calc_l1_support_cost', includeCalculatorData ? data.l1SupportCost : '');
+    setHiddenValue('nf_calc_discount', includeCalculatorData ? data.discount : '');
+    setHiddenValue('nf_calc_primary_total', includeCalculatorData ? data.primaryTotal : '');
+    setHiddenValue('nf_calc_reference_total', includeCalculatorData ? data.referenceTotal : '');
+    setHiddenValue('nf_calc_note', includeCalculatorData ? data.note : '');
+    setHiddenValue('nf_question_6_calculator_context', includeCalculatorData ? data.calculatorContext : 'Question 6 not selected');
+    setHiddenValue('nf_calc_summary', data.summary);
+
+    if (preview) {
+      preview.textContent = includeCalculatorData
+        ? `Question 6 is selected. Calculator data attached: ${data.calculatorContext}`
+        : `Selected business needs are attached. Select question 6 or use the calculator proposal button to include the calculator estimate.`;
+    }
+  }
+
+  document.querySelectorAll('[data-proposal-need]').forEach((trigger) => {
+    trigger.addEventListener('click', () => {
+      const requestedNeed = trigger.getAttribute('data-proposal-need');
+      setBusinessNeedSelection(requestedNeed);
+      syncCalculatorDataToForm();
+    });
+  });
+
+  if (zaproCalculator) {
+    zaproCalculator.addEventListener('input', syncCalculatorDataToForm);
+    zaproCalculator.addEventListener('change', syncCalculatorDataToForm);
+  }
+
+  businessNeedInputs.forEach((input) => {
+    input.addEventListener('change', syncCalculatorDataToForm);
+  });
+
+  const resetCalculatorButton = zaproCalculator?.querySelector('[data-calc-reset]');
+  if (resetCalculatorButton) {
+    resetCalculatorButton.addEventListener('click', () => {
+      window.setTimeout(syncCalculatorDataToForm, 0);
+    });
+  }
+
+  proposalForm.addEventListener('submit', (event) => {
+    syncCalculatorDataToForm();
+    if (!selectedBusinessNeeds().length) {
+      event.preventDefault();
+      const firstNeed = businessNeedInputs[0];
+      if (firstNeed) {
+        firstNeed.focus();
+        firstNeed.setCustomValidity('Please select at least one business need.');
+        firstNeed.reportValidity();
+        window.setTimeout(() => firstNeed.setCustomValidity(''), 0);
+      }
+    }
+  });
+
+  syncCalculatorDataToForm();
+})();
