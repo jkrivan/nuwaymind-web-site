@@ -149,8 +149,11 @@ button, input, textarea {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: var(--nwm-ink);
-  background: var(--nwm-mist);
+/*  color: var(--nwm-ink);
+  background: var(--nwm-mist);*/
+    
+  color: var(--nwm-paper);
+  background: var(--nwm-orange);
 }
 
 .nav-links .nav-cta {
