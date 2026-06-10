@@ -64,7 +64,10 @@
 <a href="#receive">Receive</a>
 <a href="#pay-improve">Pay &amp; Improve</a>
 <a href="#controls">Controls</a>
-<a href="#kpis">KPIs</a>
+<a href="#kpis">KPI logic</a>
+<a href="#standard-kpis">Standard KPIs</a>
+<a href="#advanced-kpis">Advanced KPIs</a>
+<a href="#benchmark-values">Benchmark values</a>
 </aside>
 <div class="detail-article">
 <section class="detail-section reveal" id="overview">
@@ -184,22 +187,171 @@
 </table>
 </div>
 </section>
+
 <section class="detail-section reveal" id="kpis">
 <p class="eyebrow">Process KPIs</p>
 <h2>The controlled process must be measured as one management system, not as isolated tasks.</h2>
-<div class="detail-kpi-grid process-kpi-grid">
-<div><strong>Approved vendor usage</strong><span>Share of addressable spend placed with qualified and approved suppliers.</span></div>
-<div><strong>Sourcing compliance</strong><span>Share of spend following the required quote, RFP or exception route.</span></div>
-<div><strong>Contract coverage</strong><span>Share of spend and critical suppliers covered by valid agreements or approved terms.</span></div>
-<div><strong>PO-before-invoice rate</strong><span>Share of invoices linked to a purchase order created before supplier commitment.</span></div>
-<div><strong>Three-way match rate</strong><span>Share of invoices matched to PO and receipt without manual exception.</span></div>
-<div><strong>Cycle time by step</strong><span>Time from supplier request to qualification, sourcing award, PO approval, receipt and invoice clearance.</span></div>
-<div><strong>Exception rate</strong><span>Transactions bypassing supplier, sourcing, contract, PO, receipt or invoice rules.</span></div>
-<div><strong>Vendor performance closure</strong><span>Share of supplier issues converted into corrective actions, ownership and follow-up.</span></div>
-<div><strong>Audit evidence completeness</strong><span>Share of sampled transactions where the full decision trail can be reconstructed.</span></div>
+<p>NuWayMind separates KPIs into two layers. <strong>Standard KPIs</strong> prove that the process is under control and usable in daily operations. <strong>Advanced KPIs</strong> convert the same workflow data into management insight for CFO, COO, CEO, procurement, finance and operational leadership.</p>
+<div class="kpi-principle-grid">
+<article>
+<span>01</span>
+<h3>Measure from the system timestamp</h3>
+<p>Cycle time, ageing and bottleneck KPIs should come from request, approval, PO, receipt and invoice events, not from manually updated spreadsheets.</p>
+</article>
+<article>
+<span>02</span>
+<h3>Separate compliance from performance</h3>
+<p>A transaction can be compliant but slow, or fast but outside policy. The dashboard should show both dimensions so management can fix the real cause.</p>
+</article>
+<article>
+<span>03</span>
+<h3>Connect KPI ownership to action</h3>
+<p>Each KPI should have an accountable owner, threshold, escalation logic and improvement action so the metric changes behaviour rather than only reporting history.</p>
+</article>
 </div>
-<div class="detail-cta"><h3>Use the controlled process to make procurement measurable from first request to final payment.</h3><a class="btn btn-primary" href="index.html#contact">Discuss process design</a></div>
 </section>
+<section class="detail-section reveal" id="standard-kpis">
+<p class="eyebrow">Standard KPIs</p>
+<h2>Standard KPIs prove that the digital procurement process is complete, controlled and adopted.</h2>
+<div class="kpi-card-grid standard-kpi-grid">
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Approved vendor usage</strong><span>Supplier control</span></div>
+<p>Measures the share of addressable spend placed with qualified and approved suppliers.</p>
+<dl><div><dt>How measured</dt><dd>Approved supplier spend ÷ total addressable spend.</dd></div><div><dt>Why it matters</dt><dd>Shows whether employees use the controlled supplier base or continue to create unmanaged third-party risk.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Supplier qualification cycle time</strong><span>Onboarding speed</span></div>
+<p>Measures the time from supplier request to supplier approval or rejection.</p>
+<dl><div><dt>How measured</dt><dd>Average and percentile days from request creation to final qualification decision.</dd></div><div><dt>Why it matters</dt><dd>Identifies bottlenecks in document collection, risk review, ownership assignment and supplier activation.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Sourcing compliance rate</strong><span>Commercial discipline</span></div>
+<p>Measures whether spend follows the required quote, RFP, e-auction or approved exception route.</p>
+<dl><div><dt>How measured</dt><dd>Spend or events following the defined sourcing path ÷ spend or events requiring sourcing.</dd></div><div><dt>Why it matters</dt><dd>Protects negotiation leverage and prevents uncontrolled awards where competition or decision proof is required.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Contract coverage</strong><span>Terms control</span></div>
+<p>Measures the share of spend and critical suppliers covered by a valid agreement, framework, price list or approved terms.</p>
+<dl><div><dt>How measured</dt><dd>Contracted spend ÷ addressable spend, plus critical suppliers without valid terms.</dd></div><div><dt>Why it matters</dt><dd>Reduces value leakage, renewal risk, unclear liability and legal exposure before purchase commitments are created.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Requisition-to-PO cycle time</strong><span>Workflow speed</span></div>
+<p>Measures the time from purchase request submission to approved purchase order release.</p>
+<dl><div><dt>How measured</dt><dd>Median, average and 90th-percentile hours or days from PR submission to PO dispatch.</dd></div><div><dt>Why it matters</dt><dd>Shows approval bottlenecks, poor request quality, missing catalogues or workflow thresholds that slow the business.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>PO-before-invoice rate</strong><span>Commitment control</span></div>
+<p>Measures whether the purchase order existed before the supplier invoice arrived.</p>
+<dl><div><dt>How measured</dt><dd>Invoices linked to a pre-existing PO ÷ all PO-relevant invoices.</dd></div><div><dt>Why it matters</dt><dd>Indicates whether the organisation controls commitments before cost appears in finance.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Three-way match rate</strong><span>Invoice quality</span></div>
+<p>Measures the share of invoices matched to purchase order and goods receipt or service acceptance without manual exception.</p>
+<dl><div><dt>How measured</dt><dd>Invoices matched automatically ÷ invoices requiring PO, receipt and invoice matching.</dd></div><div><dt>Why it matters</dt><dd>Improves payment accuracy, reduces AP workload and shows whether buying, receiving and invoicing data are aligned.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Invoice exception rate</strong><span>Rework control</span></div>
+<p>Measures invoices blocked by price, quantity, tax, supplier, PO, receipt or approval issues.</p>
+<dl><div><dt>How measured</dt><dd>Invoices with exception ÷ total invoices, segmented by exception reason and supplier.</dd></div><div><dt>Why it matters</dt><dd>Turns AP rework into process improvement evidence for supplier training, catalogue correction and receiving discipline.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Supplier on-time delivery rate</strong><span>Operational reliability</span></div>
+<p>Measures whether suppliers deliver goods or services on the agreed date and in the agreed quantity.</p>
+<dl><div><dt>How measured</dt><dd>On-time and in-full deliveries ÷ total expected deliveries.</dd></div><div><dt>Why it matters</dt><dd>Connects procurement to operational continuity, service levels, stock availability and project delivery risk.</dd></div></dl>
+</article>
+<article class="kpi-card">
+<div class="kpi-card-head"><strong>Audit evidence completeness</strong><span>Traceability</span></div>
+<p>Measures whether the full decision trail can be reconstructed for sampled transactions.</p>
+<dl><div><dt>How measured</dt><dd>Transactions with complete supplier, sourcing, contract, approval, PO, receipt and invoice evidence ÷ sampled transactions.</dd></div><div><dt>Why it matters</dt><dd>Shows whether procurement can withstand internal audit, external audit, compliance review and management challenge.</dd></div></dl>
+</article>
+</div>
+</section>
+<section class="detail-section reveal" id="advanced-kpis">
+<p class="eyebrow">Advanced KPIs</p>
+<h2>Advanced KPIs show value leakage, risk concentration, adoption quality and transformation impact.</h2>
+<div class="kpi-card-grid advanced-kpi-grid">
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Spend under management quality</strong><span>Leadership view</span></div>
+<p>Measures how much spend has an owner, category, supplier status, budget code, contract link and approval route.</p>
+<dl><div><dt>How measured</dt><dd>Spend meeting all defined control-data criteria ÷ total addressable spend.</dd></div><div><dt>Management use</dt><dd>Shows whether leadership can trust spend analytics for category strategy, cash planning and risk decisions.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Maverick spend root-cause index</strong><span>Adoption quality</span></div>
+<p>Measures off-policy buying by reason: missing catalogue, urgent need, supplier not onboarded, poor UX, weak policy or management override.</p>
+<dl><div><dt>How measured</dt><dd>Maverick spend segmented by value, department, category and root cause.</dd></div><div><dt>Management use</dt><dd>Distinguishes behavioural non-compliance from process-design gaps that the implementation team must fix.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Value leakage recovered</strong><span>Commercial impact</span></div>
+<p>Measures credits, price corrections, rebates, missed discounts and contract deviations identified and recovered through digital controls.</p>
+<dl><div><dt>How measured</dt><dd>Confirmed leakage recovered + approved cost avoidance, validated by finance where material.</dd></div><div><dt>Management use</dt><dd>Connects contract, invoice and supplier-performance data to direct financial benefit.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Approval friction index</strong><span>Decision speed</span></div>
+<p>Measures where approvals are delayed, reworked or escalated because the request, threshold, owner or policy is unclear.</p>
+<dl><div><dt>How measured</dt><dd>Approval cycle time above threshold + rework events + pending ageing, weighted by value and criticality.</dd></div><div><dt>Management use</dt><dd>Highlights whether approval rules protect the business or simply slow normal purchasing.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Budget commitment accuracy</strong><span>Cash discipline</span></div>
+<p>Measures the quality of open commitments compared with budget, forecast, purchase order status and invoice accruals.</p>
+<dl><div><dt>How measured</dt><dd>Open PO commitments and expected invoices compared with approved budget by entity, project, department and category.</dd></div><div><dt>Management use</dt><dd>Improves cash visibility and reduces late surprises from unrecorded commitments or stale purchase orders.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Supplier risk-adjusted dependency</strong><span>Resilience</span></div>
+<p>Measures concentration of critical spend with suppliers weighted by financial, quality, operational, compliance and geopolitical risk.</p>
+<dl><div><dt>How measured</dt><dd>Critical supplier spend share × risk score × substitutability factor.</dd></div><div><dt>Management use</dt><dd>Prioritises dual sourcing, contract protection, business continuity planning and supplier development.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Contract obligation performance</strong><span>Post-signature value</span></div>
+<p>Measures whether SLA, rebate, renewal, price-index, reporting, insurance, quality and compliance obligations are fulfilled.</p>
+<dl><div><dt>How measured</dt><dd>Completed obligations ÷ due obligations, with value impact for missed obligations.</dd></div><div><dt>Management use</dt><dd>Prevents contracts from becoming static files and turns obligations into measurable operating controls.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Touchless transaction rate</strong><span>Automation maturity</span></div>
+<p>Measures how many low-risk transactions move from request to PO, receipt and invoice clearance without manual intervention.</p>
+<dl><div><dt>How measured</dt><dd>Transactions completed without manual exception ÷ eligible transactions.</dd></div><div><dt>Management use</dt><dd>Shows whether automation is genuinely reducing workload or only digitising manual rework.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Exception recurrence rate</strong><span>Continuous improvement</span></div>
+<p>Measures repeated exceptions by supplier, category, department or process step after the first corrective action.</p>
+<dl><div><dt>How measured</dt><dd>Recurring exceptions after corrective action ÷ total exceptions in the same root-cause group.</dd></div><div><dt>Management use</dt><dd>Shows whether issue management creates lasting change or only resolves individual transactions.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Realised savings conversion</strong><span>CFO confidence</span></div>
+<p>Measures how much identified savings pipeline becomes implemented, contracted and financially visible benefit.</p>
+<dl><div><dt>How measured</dt><dd>Finance-validated realised savings ÷ approved savings pipeline.</dd></div><div><dt>Management use</dt><dd>Separates theoretical procurement impact from value that has reached budgets, P&amp;L or cash flow.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Working-capital opportunity capture</strong><span>Payment strategy</span></div>
+<p>Measures whether payment timing uses negotiated terms, avoids late-payment noise and captures available early-payment discounts where beneficial.</p>
+<dl><div><dt>How measured</dt><dd>Discounts captured, avoidable late payments, paid-on-term ratio and payment-term compliance.</dd></div><div><dt>Management use</dt><dd>Connects procurement terms, AP execution and cash management into one visible control point.</dd></div></dl>
+</article>
+<article class="kpi-card kpi-card-advanced">
+<div class="kpi-card-head"><strong>Transformation adoption score</strong><span>Change control</span></div>
+<p>Measures active user adoption, request quality, training completion, repeat exceptions and satisfaction by stakeholder group.</p>
+<dl><div><dt>How measured</dt><dd>Weighted score across usage, compliant transactions, training, helpdesk demand, cycle time and feedback.</dd></div><div><dt>Management use</dt><dd>Shows whether the new operating model has become routine or still depends on project-team intervention.</dd></div></dl>
+</article>
+</div>
+</section>
+<section class="detail-section reveal" id="benchmark-values">
+<p class="eyebrow">Benchmark values</p>
+<h2>Improvement targets should be directional until validated against the client baseline.</h2>
+<p>These values frame the business case for digital procurement implementation. They should be used as external comparison points, not as guaranteed results.</p>
+<div class="detail-table-wrap">
+<table class="detail-table benchmark-table">
+<thead><tr><th>Improvement KPI</th><th>Benchmark value used</th><th>How it is applied in the process design</th></tr></thead>
+<tbody>
+<tr><td>Sourcing cycle-time reduction</td><td>30% faster strategic sourcing process cycle times.</td><td>Used to set targets for sourcing intake, supplier evaluation, negotiation, award approval and decision evidence.</td></tr>
+<tr><td>Procurement productivity</td><td>25–40% more efficient procurement operating model from technology-enabled transformation.</td><td>Used to estimate automation benefits across PR, PO, invoice, exception handling and supplier collaboration.</td></tr>
+<tr><td>Analytics and e-sourcing savings</td><td>20% savings potential from analytics tools; example of 20% cost reduction in MRO through e-sourcing.</td><td>Used to frame savings pipeline, value-leakage detection and category analytics targets.</td></tr>
+<tr><td>AP processing cost efficiency</td><td>Top performers spend about $0.38 per $1,000 revenue on AP processing versus about $0.92 for bottom performers.</td><td>Used to connect invoice matching, supplier invoice quality and touchless AP to finance-visible efficiency.</td></tr>
+<tr><td>Agreement workflow efficiency</td><td>36% efficiency improvement, 36% cost avoidance and 29% cost savings in AI-enabled agreement workflows.</td><td>Used to define contract-review, approval, risk and post-signature obligation KPIs.</td></tr>
+<tr><td>PR-to-PO baseline</td><td>Median requisition-to-PO cycle time of approximately 55 hours; healthcare, pharma and life sciences benchmark of 43 hours PO cycle time and 98 hours AP processing time.</td><td>Used as a baseline comparison for workflow speed, approval friction, request quality and AP throughput.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="detail-cta"><h3>Use KPIs to manage the process after go-live, not only to justify the project before implementation.</h3><a class="btn btn-primary" href="index.html#contact">Discuss KPI model</a></div>
+</section>
+
 </div>
 </div>
 </section>
