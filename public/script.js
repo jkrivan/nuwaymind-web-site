@@ -143,7 +143,7 @@ if (zaproCalculator) {
 
   function platformAdditionalBlocks() {
     const users = totalUserCount();
-    return users > 250 ? Math.ceil((users - 250) / 250) : 0;
+    return users > 100 ? Math.ceil((users - 100) / 100) : 0;
   }
 
   function platformAnnualCost() {
