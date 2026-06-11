@@ -17,6 +17,18 @@ const contactForm = document.querySelector('[data-contact-form]');
     document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
 }("QO92DHLZLEN7");
 
+
+//ahrefs.com---------------------------------------------------------------------------------
+  var ahrefs_analytics_script = document.createElement('script');
+  ahrefs_analytics_script.async = true;
+  ahrefs_analytics_script.src = 'https://analytics.ahrefs.com/analytics.js';
+  ahrefs_analytics_script.setAttribute('data-key', 'nZ3+l8tmRsBXZ24SDEaBxg');
+  document.getElementsByTagName('head')[0].appendChild(ahrefs_analytics_script);
+//ahrefs.com---------------------------------------------------------------------------------
+
+
+
+
 function updateHeader() {
   header.classList.toggle('scrolled', window.scrollY > 16);
 }
